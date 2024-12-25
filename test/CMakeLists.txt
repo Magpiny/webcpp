@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.31.1)
+cmake_minimum_required(VERSION 3.22.1)
 project(webcpp_test CXX)
 
 add_executable(${PROJECT_NAME} test_main.cc)
