@@ -7,9 +7,11 @@ COPY . .
 # Install any additional dependencies
 # None for now
 
-RUN mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build . 
+RUN mkdir build && cd build
+RUN cmake -DCMAKE_BUILD_TYPE=Release ..
+RUN cmake --build .
 
 
-CMD ["./webcpp"]
+CMD ["./build/webcpp"]
 
 EXPOSE 5555
