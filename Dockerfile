@@ -7,11 +7,7 @@ COPY . .
 # Install any additional dependencies
 # None for now
 
-RUN 
-
-RUN mkdir build && cd build && \
-    cmake -DCMAKE_BUILD_TYPE=Release .. && \
-    cmake --build . 
+RUN mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build . 
 
 
 CMD ["./webcpp"]
