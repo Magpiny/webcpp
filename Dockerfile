@@ -12,6 +12,7 @@ COPY static/ ./static/
 COPY models/ ./models/
 COPY plugins/ ./plugins/
 COPY filters/ ./filters/
+COPY test/ ./test/
 COPY config.json .
 
 # Create build directory
