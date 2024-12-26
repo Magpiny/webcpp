@@ -15,11 +15,9 @@ COPY filters/ ./filters/
 COPY test/ ./test/
 COPY config.json .
 
-# Create build directory
-RUN mkdir build && cd build
-
 # Build the application
-RUN cd build && \
+RUN mkdir build && \
+    cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release .. && \
     make -j $(nproc)
 
@@ -28,7 +26,7 @@ FROM ubuntu:22.04
 
 # Install runtime dependencies
 RUN apt-get update && \
-    apt-get install -y \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
     gcc \
     g++ \
     git \
