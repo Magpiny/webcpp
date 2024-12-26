@@ -46,7 +46,7 @@ RUN apt-get update && \
 WORKDIR /app
 
 # Copy the built executable and required files from builder
-COPY --from=builder /app/build/your_project .
+COPY --from=builder /app/build/webcpp .
 COPY --from=builder /app/static ./static
 COPY --from=builder /app/config.json .
 
