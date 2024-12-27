@@ -39,7 +39,10 @@ RUN apt-get update && \
     libc-ares2 \
     libc-ares-dev \
     libmariadb3 \
+    libmariadb-dev-compat \
     libmariadb-dev \
+    libhiredis0.14 \
+    libhiredis-dev \
     postgresql-all \
     zlib1g-dev && \
     rm -rf /var/lib/apt/lists/*
