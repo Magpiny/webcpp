@@ -36,6 +36,8 @@ RUN apt-get update && \
     openssl \
     libssl3 \
     uuid-dev \
+    libc-ares2 \
+    libc-ares-dev \
     postgresql-all \
     zlib1g-dev && \
     rm -rf /var/lib/apt/lists/*
