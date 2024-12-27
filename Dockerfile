@@ -38,6 +38,8 @@ RUN apt-get update && \
     uuid-dev \
     libc-ares2 \
     libc-ares-dev \
+    libmariadb3 \
+    libmariadb-dev \
     postgresql-all \
     zlib1g-dev && \
     rm -rf /var/lib/apt/lists/*
