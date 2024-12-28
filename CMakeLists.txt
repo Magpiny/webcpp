@@ -71,6 +71,7 @@ target_sources(${PROJECT_NAME}
                ${PLUGIN_SRC}
                ${MODEL_SRC})
 
+
 FILE(GLOB SCP_LIST ${CMAKE_CURRENT_SOURCE_DIR}/views/*.csp)
 foreach(cspFile ${SCP_LIST})
   message(STATUS "cspFile:" ${cspFile})
@@ -84,13 +85,22 @@ foreach(cspFile ${SCP_LIST})
   set(VIEWSRC ${VIEWSRC} ${classname}.cc)
 endforeach()
 
-# add_executable(webapp ${SRC_DIR} ${VIEWSRC})
+#add_executable(webapp ${SRC_DIR} ${VIEWSRC})
 
 # ##############################################################################
 # uncomment the following line for dynamically loading views 
- set_property(TARGET ${PROJECT_NAME} PROPERTY ENABLE_EXPORTS ON)
+set_property(TARGET ${PROJECT_NAME} PROPERTY ENABLE_EXPORTS ON)
 
 # ##############################################################################
 
 add_subdirectory(test)
+
+# copy files to build directory
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/views DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/logs DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/static DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/models DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config.json DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+
 

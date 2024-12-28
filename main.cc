@@ -1,32 +1,22 @@
 #include <drogon/drogon.h>
+#include <memory>
 #include <trantor/utils/Logger.h>
 
 using namespace drogon;
+#include "controllers/HomePageCtrl.h"
 
 int main()
 {
     const int PORT = 5555;
-    // Set HTTP listener address and port
-    drogon::app().addListener("0.0.0.0", PORT);
+    const std::shared_ptr<HomePageCtrl> controller = std::make_shared<HomePageCtrl>();
+
     // Load config file
     drogon::app().loadConfigFile("./config.json");
-    // drogon::app().loadConfigFile("../config.yaml");
-    // Run HTTP framework,the method will block in the internal event loop
-
-    drogon::HttpAppFramework::instance()
-        .registerHandler("/list_para",
-            [=](const HttpRequestPtr& req,
-                std::function<void(const HttpResponsePtr&)>&& callback) {
-                auto para = req->getParameters();
-                HttpViewData data;
-                data.insert("title", "ListParameters");
-                data.insert("parameters", para);
-                auto resp = HttpResponse::newHttpViewResponse("ListParams.csp", data);
-                callback(resp);
-            });
+    // drogon::app().registerController(controller);
 
     LOG_INFO << "Drogon Web server running on PORT: " << PORT << "\n";
 
     drogon::app().run();
+
     return 0;
 }

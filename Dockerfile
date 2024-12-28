@@ -53,6 +53,8 @@ WORKDIR /app
 # Copy the built executable and required files from builder
 COPY --from=builder /app/build/webcpp .
 COPY --from=builder /app/static ./static
+COPY --from=builder /app/views ./views
+COPY --from=builder /app/logs ./logs
 COPY --from=builder /app/config.json .
 
 # Expose the port your app runs on

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[title]]</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">[[message]]</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main>
+            <h1>Welcome to Our Website</h1>
+            
+            <section class="content-section">
+                <h2>Innovation at Its Best</h2>
+                <p>In today's rapidly evolving digital landscape, staying ahead means embracing cutting-edge technologies and innovative solutions. Our platform leverages the power of modern web technologies to deliver exceptional performance and reliability.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Building the Future</h2>
+                <p>
+                    We believe in creating sustainable, scalable solutions that not only meet current needs but are also prepared for future challenges. Our team of experts works tirelessly to ensure we're always at the forefront of technological advancement.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>Community Driven</h2>
+                <p>
+                    Our success is built on the foundation of a strong community. We value collaboration, open communication, and continuous improvement, working together to create solutions that make a real difference in people's lives.
+                </p>
+
+            </section>
+
+            <section class="content-section">
+                <h2> About this page </h2>
+                <big> 
+                    To whoever seeing this, this is a C++ Website and for you see this website the owner has undergone a 
+                    series of cmake and config.json file configs before fighting docker and build environment configs before deploying it. 
+                </big>
+                <p>
+                    <p>This is a <em>proof of concept website</em>; that web development in C++ is a viable option too.. <br>
+                        This website is made using C++ drogon framework and hosted on render with docker.
+                    </p>
+                    <em> 
+                        TODO: server side code using postgres as a database. This site will evolve into something i don't know
+                        provided I have time to explore. 
+                    </em>
+
+                </p>
+
+                <h3 style="color:red;">I'm just curious to learn how C++ can be used in web development</h3>
+            </section>
+        </main>
+
+        <aside class="sidebar">
+            <h3>Latest Updates</h3>
+            <div class="sidebar-content">
+                <div class="update-item">
+                    <h4>New Features Released</h4>
+                    <p>Check out our latest platform updates!</p>
+                </div>
+                <div class="update-item">
+                    <h4>Upcoming Events</h4>
+                    <p>Join our next webinar series.</p>
+                </div>
+                <div class="update-item">
+                    <h4>Community News</h4>
+                    <p>See what our community has been up to.</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: magpinyb@proton.me</p>
+                <p>Phone: (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <p id="current-date"></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

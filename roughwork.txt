@@ -1,0 +1,14 @@
+This is where I keep temporary commads to avoid losing or forgetting them
+
+CMakeLists.txt:
+# ******************************************************************************
+
+# COPY config.json file to build directory
+#add_custom_command(
+    #TARGET webcpp POST_BUILD
+    #COMMAND ${CMAKE_COMMAND} -E copy
+        #${CMAKE_CURRENT_SOURCE_DIR}/config.json
+        #${CMAKE_CURRENT_BINARY_DIR}/config.json
+    #COMMENT "Copying config.json to build directory"
+#)
+# ******************************************************************************
