@@ -49,14 +49,7 @@
             "./views"
         ],
         "dynamic_views_output_path":"",
-        "log":{
-            "use_spdlog": true,
-            "log_path": "./logs",
-            "logfile_basename":"",
-            "log_level": "DEBUG",
-            "max_files": 13,
-            "display_local_time": true
-        }
+        
     },
     "plugins": [],
     "custom_config": {

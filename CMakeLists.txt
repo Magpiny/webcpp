@@ -71,21 +71,18 @@ target_sources(${PROJECT_NAME}
                ${PLUGIN_SRC}
                ${MODEL_SRC})
 
+# ******************************************************************************
 
-FILE(GLOB SCP_LIST ${CMAKE_CURRENT_SOURCE_DIR}/views/*.csp)
-foreach(cspFile ${SCP_LIST})
-  message(STATUS "cspFile:" ${cspFile})
-  execute_process(COMMAND basename ARGS "-s .csp ${cspFile}" OUTPUT_VARIABLE classname)
-  message(STATUS "view classname:" ${classname})
-  add_custom_command(
-    OUTPUT ${classname}.h ${classname}.cc
-    COMMAND drogon_ctl ARGS create view ${cspFile}
-    DEPENDS ${cspFile}
-    VERBATIM)
-  set(VIEWSRC ${VIEWSRC} ${classname}.cc)
-endforeach()
+# COPY config.json file to build directory
+add_custom_command(
+    TARGET webcpp POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_CURRENT_SOURCE_DIR}/config.json
+        ${CMAKE_CURRENT_BINARY_DIR}/config.json
+    COMMENT "Copying config.json to build directory"
+)
+# ******************************************************************************
 
-#add_executable(webapp ${SRC_DIR} ${VIEWSRC})
 
 # ##############################################################################
 # uncomment the following line for dynamically loading views 
@@ -97,7 +94,7 @@ add_subdirectory(test)
 
 # copy files to build directory
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/views DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-# file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/logs DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/logs DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/static DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/models DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config.json DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

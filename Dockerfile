@@ -18,8 +18,8 @@ COPY config.json .
 # Build the application
 RUN mkdir build && \
     cd build && \
-    cmake -B build -DCMAKE_BUILD_TYPE=Release .. && \
-    cmake --build . --parallel $(nproc)
+    cmake .. && \
+    cmake --build .
 
 # Create runtime image
 FROM ubuntu:22.04
