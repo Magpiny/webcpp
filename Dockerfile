@@ -13,7 +13,6 @@ COPY models/ ./models/
 COPY plugins/ ./plugins/
 COPY filters/ ./filters/
 COPY test/ ./test/
-COPY logs/ ./logs/
 COPY config.json .
 
 # Build the application
@@ -55,7 +54,6 @@ WORKDIR /app
 COPY --from=builder /app/build/webcpp .
 COPY --from=builder /app/static ./static
 COPY --from=builder /app/views ./views
-COPY --from=builder /app/logs ./logs
 COPY --from=builder /app/config.json .
 
 # Expose the port your app runs on
