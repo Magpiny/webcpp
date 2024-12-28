@@ -13,6 +13,7 @@ COPY models/ ./models/
 COPY plugins/ ./plugins/
 COPY filters/ ./filters/
 COPY test/ ./test/
+COPY logs/ ./logs/
 COPY config.json .
 
 # Build the application
