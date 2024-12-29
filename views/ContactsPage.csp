@@ -1,5 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
+<%inc #include <drogon/HttpRequest.h> %>
+<%inc #include <string> %>
+<%c++ auto &req = @@.get<HttpRequestPtr>("req"); %>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,13 +28,16 @@
     <div class="container">
         <main>
             <h1>[[title]]</h1>
+            <%c++ if(req->getParameter("status") == "success") { %>
+                <div class="success-message">Your message has been sent successfully!</div>
+            <%c++ } %>
             
             <section class="content-section">
                 <h2>Get in Touch</h2>
-                <form class="contact-form">
+                <form class="contact-form" action="/contact" method="POST">
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="username" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
