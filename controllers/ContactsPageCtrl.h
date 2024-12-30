@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <drogon/HttpController.h>
 
 using namespace drogon;
@@ -18,5 +19,9 @@ public:
         std::function<void(const HttpResponsePtr&)>&& callback); // Handle contact form submission
 
 private:
+    const std::int_fast16_t valid_email_length = 254;
     bool validateEmail(std::string& email);
+
+    // QUeries
+    const std::string insert_contact_qry = "INSERT INTO contacts (username, email, message) VALUES ($1, $2, $3)";
 };

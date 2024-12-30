@@ -63,7 +63,7 @@
         "dynamic_views_path":[
             "./views"
         ],
-        "dynamic_views_output_path":"./views/",
+        "dynamic_views_output_path":"./views",
         
     },
     "plugins": [],

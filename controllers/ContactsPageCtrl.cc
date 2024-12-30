@@ -19,6 +19,7 @@ void ContactsPageCtrl::getContactsPage(const HttpRequestPtr& req,
     // Add some dummy data
     HttpViewData data;
     data.insert("title", "Contact Us");
+    data.insert("greetings", "Hello world");
     data.insert("req", req);
 
     // Load Contacts Page
@@ -48,7 +49,7 @@ void ContactsPageCtrl::postMessage(const HttpRequestPtr& req,
     };
 
     // Validate user email
-    if (!validateEmail(email)) {
+    if (!validateEmail(email) || email.find("..") != std::string::npos || email.length() > valid_email_length) {
         auto resp = HttpResponse::newHttpResponse();
         resp->setStatusCode(k400BadRequest);
         resp->setBody("Invalid email format");
@@ -58,7 +59,6 @@ void ContactsPageCtrl::postMessage(const HttpRequestPtr& req,
 
     // Execute Query and Store data in a database (postgress database)
     auto client_ptr = app().getDbClient();
-    const std::string insert_contact_qry = "INSERT INTO contacts (username, email, message) VALUES ($1, $2, $3)";
 
     client_ptr->execSqlAsync(
         insert_contact_qry,
