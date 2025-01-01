@@ -1,9 +1,12 @@
 #include "ApiMessagesCtrl.h"
 #include <algorithm>
 #include <cmath>
+#include <drogon/HttpAppFramework.h>
 #include <drogon/HttpResponse.h>
 #include <drogon/HttpTypes.h>
+#include <drogon/RateLimiter.h>
 #include <drogon/orm/Exception.h>
+#include <drogon/plugins/Hodor.h>
 #include <functional>
 #include <json/json.h>
 #include <json/value.h>
@@ -45,10 +48,10 @@ void ApiMessagesCtrl::getMessages(const HttpRequestPtr& req, std::function<void(
     // Initialize the database
     auto dbClient = drogon::app().getDbClient();
 
-    get_total_count([&, dbClient, page, limit, offset, cb_copy](int total_records) {
+    get_total_count([this, dbClient, page, limit, offset, cb_copy](int total_records) {
         int total_pages = (total_records + limit - 1) / limit;
         // Execute sql statement
-        dbClient->execSqlAsync(get_messages_qry, [&, page, limit, total_pages, total_records, cb_copy](const drogon::orm::Result& result) {
+        dbClient->execSqlAsync(get_messages_qry, [page, limit, total_pages, total_records, cb_copy](const drogon::orm::Result& result) {
         Json::Value responseJson(Json::arrayValue);
         Json::Value res;
 
@@ -102,5 +105,17 @@ void ApiMessagesCtrl::get_total_count(const std::function<void(int)>& callback)
         }
         callback(res[0]["total"].as<int>()); },
         //
-        [callback](const drogon::orm::DrogonDbException& err) { callback(0); });
+        [callback](const drogon::orm::DrogonDbException& err) { 
+            LOG_ERROR << "Database error in get_total_count: " << err.base().what();
+            callback(0); });
+};
+
+HttpResponsePtr ApiMessagesCtrl::createErrorResponse(const std::string& message,
+    HttpStatusCode code)
+{
+    Json::Value errorJson;
+    errorJson["error"] = message;
+    auto resp = HttpResponse::newHttpJsonResponse(errorJson);
+    resp->setStatusCode(code);
+    return resp;
 }

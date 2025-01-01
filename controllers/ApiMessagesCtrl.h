@@ -1,7 +1,7 @@
 #pragma once
 
-#include <cstdint>
 #include <drogon/HttpController.h>
+#include <drogon/RateLimiter.h>
 #include <string>
 
 using namespace drogon;
@@ -14,8 +14,11 @@ public:
 
     void getMessages(const HttpRequestPtr& req, std::function<void(const HttpResponsePtr&)>&& callback);
 
+    static HttpResponsePtr createErrorResponse(const std::string& message,
+        HttpStatusCode code);
+
 private:
-    // Minimum and Maximum limit range
+    // Minimum and Maximum limit range for pagination
     const int min = 1;
     const int max = 100;
 

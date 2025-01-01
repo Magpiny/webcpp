@@ -22,7 +22,7 @@
         }
     ],
     "app": {
-        "number_of_threads": 16,
+        "number_of_threads": 0,
         "document_root": "./static/",
         "upload_path": "uploads",
         "file_types": [
@@ -66,7 +66,40 @@
         "dynamic_views_output_path":"./views",
         
     },
-    "plugins": [],
+    "plugins": [{
+            "name":"drogon::plugin::RealIpResolver",
+            "dependencies":[],
+            "config":{}
+        },
+        {
+            "name":"drogon::plugin::Redirector",
+            "dependencies":[],
+            "config":{}
+        },
+        {
+        "name":"drogon::plugin::Hodor",
+        "dependencies":["drogon::plugin::RealIpResolver"],
+        "config":{
+            "algorithm":"token_bucket",
+            "urls":["^/api/messages/.*"],
+            "time_unit":3600,
+            "capacity": 500,
+            "ip_capacity": 300,
+            "user_capacity": 60,
+            "use_real_ip_resolver": true,
+            "multi_threads": true,
+            "rejection_message":"Too many requests",
+            "limiter_expire_time": 3600
+        }
+    },  {
+            "name": "drogon::plugin::SlashRemover",
+            "dependencies": ["drogon::plugin::Redirector"],
+            "config":{
+                "remove_duplicate_slashes": true,
+                "redirect": true
+            }
+        }
+    ],
     "custom_config": {
         "content_security_policy": {
             "default-src": ["'self'"],
