@@ -46,6 +46,7 @@ else ()
 endif ()
 
 aux_source_directory(controllers CTL_SRC)
+aux_source_directory(controllers/APIs CTL_APIS)
 aux_source_directory(filters FILTER_SRC)
 aux_source_directory(plugins PLUGIN_SRC)
 aux_source_directory(models MODEL_SRC)
@@ -67,6 +68,7 @@ target_sources(${PROJECT_NAME}
                PRIVATE
                ${SRC_DIR}
                ${CTL_SRC}
+               ${CTL_APIS}
                ${FILTER_SRC}
                ${PLUGIN_SRC}
                ${MODEL_SRC})

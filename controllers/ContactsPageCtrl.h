@@ -1,5 +1,6 @@
 #pragma once
 
+#include <argon2.h>
 #include <cstdint>
 #include <drogon/HttpController.h>
 
@@ -14,6 +15,7 @@ public:
 
     METHOD_LIST_END
 
+    void postSth();
     void getContactsPage(const HttpRequestPtr& req, std::function<void(const HttpResponsePtr&)>&& callback);
     void postMessage(const HttpRequestPtr& req,
         std::function<void(const HttpResponsePtr&)>&& callback); // Handle contact form submission
