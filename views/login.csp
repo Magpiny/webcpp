@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%inc #include <drogon/utils/OStringStream.h> %>
+<%inc #include <drogon/HttpRequestPtr.h> %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -9,7 +11,11 @@
 </head>
 <body>
     <div class="container">
-        <form class="login-form">
+    <span class="error-message">[[error]]</span>
+        <form class="login-form" action="/login" method="POST">
+
+
+            <input type="hidden" name="_csrf" value="<%=req->getCookie("_csrf")%>">
             <h2>[[title]]</h2>
             <div class="form-group">
                 <input type="text" name="username" placeholder="Username" required>
@@ -20,6 +26,8 @@
             <button type="submit">Login</button>
             <p class="register-link">Don't have an account? <a href="/register">Register</a></p>
         </form>
+        <h3 id="current_date"></h3>
     </div>
+    <script src="/js/authy.js" defer></script>
 </body>
 </html>

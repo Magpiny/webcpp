@@ -1,84 +1,97 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #e6f3ff 0%, #ffffff 100%);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e6f3ff 0%, #ffffff 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-message {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  padding: 10px 20px;
+  z-index: 10;
 }
 
 .container {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
 }
 
 .register-form {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 150, 0.1);
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 150, 0.1);
 }
 
 h2 {
-    text-align: center;
-    color: #2c5282;
-    margin-bottom: 30px;
+  text-align: center;
+  color: #2c5282;
+  margin-bottom: 30px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 input {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #e2e8f0;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: border-color 0.3s;
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
 }
 
 input:focus {
-    border-color: #4299e1;
-    outline: none;
+  border-color: #4299e1;
+  outline: none;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-    background: #4299e1;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
+  width: 100%;
+  padding: 12px;
+  background: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 button:hover {
-    background: #2b6cb0;
+  background: #2b6cb0;
 }
 
 .login-link {
-    text-align: center;
-    margin-top: 20px;
-    color: #4a5568;
+  text-align: center;
+  margin-top: 20px;
+  color: #4a5568;
 }
 
 .login-link a {
-    color: #4299e1;
-    text-decoration: none;
+  color: #4299e1;
+  text-decoration: none;
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 10px;
-    }
-    
-    .register-form {
-        padding: 20px;
-    }
-}
+  .container {
+    padding: 10px;
+  }
 
+  .register-form {
+    padding: 20px;
+  }
+}

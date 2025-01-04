@@ -1,7 +1,23 @@
+/**
+ *  Registration and Login System in C++
+ *  This file implements:
+ *  *** Registration - Saving data to database
+ *       Hasshing password using Argon2 before storing them in database
+ *       Serverside email verification
+ *  *** Login: Verifying user credentials
+ *  *** Cross site request forgery prevention
+ *  *** Cross site scripting prevention
+ *  *** Setting and Validating cookies
+ *  *** Session and DB management is done through the config file
+ *  *** DB Used: postgresql v16.
+ *  *** Drogon & c++ is awesome
+ */
+
 #pragma once
 
 #include <argon2.h>
 #include <drogon/HttpController.h>
+#include <json/json.h>
 #include <random>
 
 using namespace drogon;
@@ -13,7 +29,7 @@ public:
     ADD_METHOD_TO(AuthCtrl::showLogin, "/login", Get);
     ADD_METHOD_TO(AuthCtrl::showRegister, "/register", Get);
 
-    ADD_METHOD_TO(AuthCtrl::processLogin, "/login", Post);
+    ADD_METHOD_TO(AuthCtrl::processLogin, "/login", Post, "CsrfFilter");
     ADD_METHOD_TO(AuthCtrl::processRegister, "/register", Post);
     ADD_METHOD_TO(AuthCtrl::logout, "/logout", Post);
 
@@ -24,6 +40,9 @@ public:
     void processLogin(const HttpRequestPtr& req, std::function<void(const HttpResponsePtr&)>&& callback);
     void processRegister(const HttpRequestPtr& req, std::function<void(const HttpResponsePtr&)>&& callback);
     void logout(const HttpRequestPtr& req, std::function<void(const HttpResponsePtr&)>&& callback);
+
+private:
+    const std::string qry_register = "INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3)";
 };
 
 // Password Hasher

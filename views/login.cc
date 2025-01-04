@@ -18,6 +18,8 @@ std::string login::genText(const DrTemplateData& login_view_data)
 {
 	drogon::OStringStream login_tmp_stream;
 	std::string layoutName{""};
+	login_tmp_stream << "<%inc #include <drogon/HttpRequestPtr.h> %>\n";
+login_tmp_stream<<"\n";
 	login_tmp_stream << "<html>\n";
 	login_tmp_stream << "<head>\n";
 	login_tmp_stream << "    <meta charset=\"UTF-8\">\n";
@@ -27,7 +29,20 @@ std::string login::genText(const DrTemplateData& login_view_data)
 	login_tmp_stream << "</head>\n";
 	login_tmp_stream << "<body>\n";
 	login_tmp_stream << "    <div class=\"container\">\n";
-	login_tmp_stream << "        <form class=\"login-form\">\n";
+	login_tmp_stream << "    <span class=\"error-message\">";
+{
+    auto & val=login_view_data["error"];
+    if(val.type()==typeid(const char *)){
+        login_tmp_stream<<*(std::any_cast<const char *>(&val));
+    }else if(val.type()==typeid(std::string)||val.type()==typeid(const std::string)){
+        login_tmp_stream<<*(std::any_cast<const std::string>(&val));
+    }
+}
+	login_tmp_stream << "</span>\n";
+	login_tmp_stream << "        <form class=\"login-form\" action=\"/login\" method=\"POST\">\n";
+login_tmp_stream<<"\n";
+login_tmp_stream<<"\n";
+	login_tmp_stream << "            <input type=\"hidden\" name=\"_csrf\" value=\"<%=req->getCookie(\"_csrf\")%>\">\n";
 	login_tmp_stream << "            <h2>";
 {
     auto & val=login_view_data["title"];
@@ -47,7 +62,9 @@ std::string login::genText(const DrTemplateData& login_view_data)
 	login_tmp_stream << "            <button type=\"submit\">Login</button>\n";
 	login_tmp_stream << "            <p class=\"register-link\">Don't have an account? <a href=\"/register\">Register</a></p>\n";
 	login_tmp_stream << "        </form>\n";
+	login_tmp_stream << "        <h3 id=\"current_date\"></h3>\n";
 	login_tmp_stream << "    </div>\n";
+	login_tmp_stream << "    <script src=\"/js/authy.js\" defer></script>\n";
 	login_tmp_stream << "</body>\n";
 	login_tmp_stream << "</html>\n";
 if(layoutName.empty())

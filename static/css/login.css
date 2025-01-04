@@ -1,83 +1,97 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ebf4ff 0%, #ffffff 100%);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ebf4ff 0%, #ffffff 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.error-message {
+  display: block;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: wheat;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  padding: 10px 20px;
+  z-index: 10;
 }
 
 .login-form {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 150, 0.1);
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 150, 0.1);
 }
 
 h2 {
-    text-align: center;
-    color: #3182ce;
-    margin-bottom: 30px;
+  text-align: center;
+  color: #3182ce;
+  margin-bottom: 30px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 input {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #e2e8f0;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: border-color 0.3s;
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
 }
 
 input:focus {
-    border-color: #3182ce;
-    outline: none;
+  border-color: #3182ce;
+  outline: none;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-    background: #3182ce;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
+  width: 100%;
+  padding: 12px;
+  background: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 button:hover {
-    background: #2c5282;
+  background: #2c5282;
 }
 
 .register-link {
-    text-align: center;
-    margin-top: 20px;
-    color: #4a5568;
+  text-align: center;
+  margin-top: 20px;
+  color: #4a5568;
 }
 
 .register-link a {
-    color: #3182ce;
-    text-decoration: none;
+  color: #3182ce;
+  text-decoration: none;
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 10px;
-    }
-    
-    .login-form {
-        padding: 20px;
-    }
+  .container {
+    padding: 10px;
+  }
+
+  .login-form {
+    padding: 20px;
+  }
 }

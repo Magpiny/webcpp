@@ -34,6 +34,7 @@ RUN apt-get update && \
     libsqlite3-dev \
     libjsoncpp-dev \
     openssl \
+    libargon2-dev \
     libssl3 \
     uuid-dev \
     libc-ares2 \
