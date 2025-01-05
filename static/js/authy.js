@@ -44,3 +44,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update date every minute
     setInterval(updateDate, 60000);
 });
+
+document.querySelector('.register-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const token = document.querySelector('input[name="_csrf"]').value;
+
+    fetch('/register', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-Token': token,
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(new FormData(this))
+    }).then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
+    });
+});

@@ -1,9 +1,19 @@
 #include "AuthCtrl.h"
 
 #include <drogon/HttpResponse.h>
+#include <drogon/HttpTypes.h>
 #include <drogon/HttpViewData.h>
 #include <drogon/orm/Mapper.h>
+#include <regex>
 #include <string>
+// Server side email verification: just incase the user has js disabled in the browser
+
+bool AuthCtrl::is_email_valid(const std::string& email)
+{
+
+    const std::regex pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    return std::regex_match(email, pattern);
+};
 
 // Helper function for Adding security headers
 void addSecurityHeaders(const HttpResponsePtr& resp)
@@ -31,12 +41,17 @@ void AuthCtrl::showLogin(const HttpRequestPtr& req,
     if (session && session->find("user_id")) {
         auto resp = HttpResponse::newRedirectionResponse("/");
         callback(resp);
+
         return;
     }
 
     HttpViewData data;
     data.insert("title", "Welcome back..");
+    data.insert("csrf_token", session->get<std::string>("csrf_token"));
+
     auto resp = HttpResponse::newHttpViewResponse("login", data);
+    resp->addHeader("X-CSRF-Token", session->get<std::string>("csrf_token"));
+
     callback(resp);
 };
 
@@ -53,7 +68,11 @@ void AuthCtrl::showRegister(const HttpRequestPtr& req,
 
     HttpViewData data;
     data.insert("title", "Create Account");
+    data.insert("csrf_token", session->get<std::string>("csrf_token"));
+
     auto resp = HttpResponse::newHttpViewResponse("registration", data);
+    resp->addHeader("X-CSRF-Token", session->get<std::string>("csrf_token"));
+
     callback(resp);
 }
 
@@ -202,10 +221,20 @@ void AuthCtrl::processRegister(const HttpRequestPtr& req, std::function<void(con
 
     // Return error on empty form fields
     if (username.empty() || email.empty() || password.empty()) {
-        Json::Value ret;
-        ret["status"] = "error";
-        ret["message"] = "Missing required fields";
-        auto resp = HttpResponse::newHttpJsonResponse(ret);
+        Json::Value mssg_err;
+        mssg_err["status"] = "error";
+        mssg_err["message"] = "Missing required fields";
+        auto resp = HttpResponse::newHttpJsonResponse(mssg_err);
+        resp->setStatusCode(k400BadRequest);
+        callback(resp);
+        return;
+    }
+
+    if (!is_email_valid(email)) {
+        Json::Value svr_resp;
+        svr_resp["status"] = "error";
+        svr_resp["message"] = "Invalid email address";
+        auto resp = HttpResponse::newHttpJsonResponse(svr_resp);
         resp->setStatusCode(k400BadRequest);
         callback(resp);
         return;

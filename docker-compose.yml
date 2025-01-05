@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5555:5555"
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_HOST=db
+    volumes:
+      - ./config.json:/app/config.json
+    networks:
+      - drogon-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: tutorial
+      POSTGRES_USER: wanjares
+      POSTGRES_PASSWORD: your_secure_password  # Change this to a secure password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - drogon-network
+    restart: unless-stopped
+
+networks:
+  drogon-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

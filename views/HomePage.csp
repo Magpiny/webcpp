@@ -89,6 +89,7 @@
                 <h4>Contact Us</h4>
                 <p>Email: magpinyb@proton.me</p>
                 <p>Phone: (555) 123-4567</p>
+                <h4><a href="/login" syle="color:white;text-decoration:none;">Login/Sign Up</a></h4>
             </div>
             <div class="footer-section">
                 <p id="current-date"></p>

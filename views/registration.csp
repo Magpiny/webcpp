@@ -12,6 +12,9 @@
 
         <span class="error-message">[[error]]</span>
         <form class="register-form" action="/register" method="POST">
+
+            <input type="hidden" name="_csrf" value="[[csrf_token]]">
+
             <h2>[[title]]</h2>
             <div class="form-group">
                 <input type="text" name="username" placeholder="Username" required>

@@ -26,7 +26,9 @@
         "document_root": "./static/",
         "upload_path": "uploads",
         "enable_session": true,
-        "session_timeout":0,
+        "session_timeout":7200,
+        "session_same_site": "Lax",
+        "session_max_age": 7200,
         
         "file_types": [
             "gif",

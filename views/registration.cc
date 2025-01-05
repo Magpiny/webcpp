@@ -38,6 +38,18 @@ registration_tmp_stream<<"\n";
 }
 	registration_tmp_stream << "</span>\n";
 	registration_tmp_stream << "        <form class=\"register-form\" action=\"/register\" method=\"POST\">\n";
+registration_tmp_stream<<"\n";
+	registration_tmp_stream << "            <input type=\"hidden\" name=\"_csrf\" value=\"";
+{
+    auto & val=registration_view_data["csrf_token"];
+    if(val.type()==typeid(const char *)){
+        registration_tmp_stream<<*(std::any_cast<const char *>(&val));
+    }else if(val.type()==typeid(std::string)||val.type()==typeid(const std::string)){
+        registration_tmp_stream<<*(std::any_cast<const std::string>(&val));
+    }
+}
+	registration_tmp_stream << "\">\n";
+registration_tmp_stream<<"\n";
 	registration_tmp_stream << "            <h2>";
 {
     auto & val=registration_view_data["title"];

@@ -26,11 +26,11 @@ class AuthCtrl : public drogon::HttpController<AuthCtrl> {
 public:
     METHOD_LIST_BEGIN
 
-    ADD_METHOD_TO(AuthCtrl::showLogin, "/login", Get);
-    ADD_METHOD_TO(AuthCtrl::showRegister, "/register", Get);
+    ADD_METHOD_TO(AuthCtrl::showLogin, "/login", Get, "CsrfFilter");
+    ADD_METHOD_TO(AuthCtrl::showRegister, "/register", Get, "CsrfFilter");
 
     ADD_METHOD_TO(AuthCtrl::processLogin, "/login", Post, "CsrfFilter");
-    ADD_METHOD_TO(AuthCtrl::processRegister, "/register", Post);
+    ADD_METHOD_TO(AuthCtrl::processRegister, "/register", Post, "CsrfFilter");
     ADD_METHOD_TO(AuthCtrl::logout, "/logout", Post);
 
     METHOD_LIST_END
@@ -43,6 +43,8 @@ public:
 
 private:
     const std::string qry_register = "INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3)";
+
+    bool is_email_valid(const std::string& email);
 };
 
 // Password Hasher

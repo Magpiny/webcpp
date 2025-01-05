@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<%inc #include <drogon/utils/OStringStream.h> %>
-<%inc #include <drogon/HttpRequestPtr.h> %>
-
 <html>
+<
+<%inc #include <drogon/utils/OStringStream.h> %>
+<%inc #include <drogon/HttpRequest.h> %>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +15,8 @@
     <span class="error-message">[[error]]</span>
         <form class="login-form" action="/login" method="POST">
 
+            <input type="hidden" name="_csrf" value=[[csrf_token]]>
 
-            <input type="hidden" name="_csrf" value="<%=req->getCookie("_csrf")%>">
             <h2>[[title]]</h2>
             <div class="form-group">
                 <input type="text" name="username" placeholder="Username" required>
